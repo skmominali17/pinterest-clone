@@ -1,0 +1,58 @@
+<% include ./partials/header.ejs %>
+<div class="flex items-center h-screen w-full bg-zinc-300">
+    <div class="w-full bg-white rounded-md shadow-lg p-8 m-4 md:max-w-sm md:mx-auto">
+      <span class="block w-full text-xl capitalize font-bold mb-4 text-center">Create New Account</span>
+      <form class="mb-4" action="/register" method="post">
+        <div class="mb-4 md:w-full">
+          <label for="username" class="block text-xs mb-1">Username</label>
+          <input
+            class="w-full border rounded p-2 outline-none focus:shadow-outline"
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Username"
+          />
+        </div>
+        <div class="mb-4 md:w-full">
+          <label for="email" class="block text-xs mb-1">Email</label>
+          <input
+            class="w-full border rounded p-2 outline-none focus:shadow-outline"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+          />
+        </div>
+        <div class="mb-6 md:w-full">
+          <label for="password" class="block text-xs mb-1">Password</label>
+          <input
+            class="w-full border rounded p-2 outline-none focus:shadow-outline"
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+          />
+        </div>
+        <div class="mb-6 md:w-full">
+          <label for="contact" class="block text-xs mb-1">Contact</label>
+          <input
+            class="w-full border rounded p-2 outline-none focus:shadow-outline"
+            type="number"
+            name="contact"
+            id="contact"
+            placeholder="Contact"
+          />
+        </div>
+        <input
+          type="submit"
+          value="Register"
+          class="bg-red-600 hover:bg-red-700 text-white uppercase text-sm font-semibold px-4 py-2 rounded-full w-full"
+        />
+      </form>
+      <div class="flex justify-between">
+        <a class="text-blue-700 text-center text-sm" href="/login">Already have an account?</a>
+      </div>
+    </div>
+  </div>
+  
+<% include ./partials/footer.ejs %>
