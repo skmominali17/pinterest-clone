@@ -6,7 +6,7 @@
             <div class="card w-full h-40 bg-sky-200 rounded-lg overflow-hidden">
               <img src="/images/uploads/<%=post.image%>" class="w-full h-full object-cover" />
             </div>
-            <h4 class="mt-2 text-sm"><%=post.title%></h4>
+            <a class="mt-2 text-sm underline" href="/show/posts/<%=post._id%>"><%=post.title%></a>
             <h5 class="mt-2 text-xs"><%=post.description%></h5>
           </div>
     <% })%>

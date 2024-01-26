@@ -2,13 +2,11 @@
 <div class="w-full min-h-screen bg-zinc-800 px-10 py-8 text-white">
   <div class="cards flex flex-wrap gap-10">
     <% posts.forEach((post) => { %>
-        <div class="w-32">
+        <div class="w-32 text-center">
             <div class="card w-full h-40 bg-zinc-700 rounded-lg overflow-hidden">
               <img src="/images/uploads/<%=post.image%>" class="w-full h-full object-cover" />
             </div>
-            <h4 class="mt-2 text-md">@<%=post.user.username%></h4>
-            <h4 class="text-sm"><%=post.title%></h4>
-            <h5 class="text-xs"><%=post.description%></h5>
+            <a href="/show/posts/<%=post._id%>" class="text-sm mt-4 underline "><%=post.title%></a>
           </div>
     <% })%>
   </div>

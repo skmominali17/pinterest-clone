@@ -1,0 +1,60 @@
+<% include ./partials/header.ejs %>
+<div
+  class="w-full min-h-screen bg-zinc-800 px-10 py-8 text-white flex items-center justify-center"
+>
+  <div
+    class="w-1/2 h-[70vh] bg-sky-200 flex justify-center items-center rounded-md overflow-hidden"
+  >
+    <div class="image bg-zinc-200 w-1/2 h-full overflow-hidden">
+      <img
+        src="/images/uploads/<%=post.image%>"
+        class="w-full h-full object-cover"
+      />
+    </div>
+    <div class="details bg-zinc-300 w-1/2 h-full text-black">
+      <a
+        href="/save/<%=post._id%>"
+        class="px-4 py-2 rounded-full text-white bg-red-700 text-md mt-5 mr-8 float-right"
+        >Save</a
+      >
+      <div class="flex items-center justify-between mt-20 mx-5">
+        <div class="flex items-center justify-center">
+          <div class="w-12 h-12 overflow-hidden rounded-full">
+            <img
+              src="/images/uploads/<%=post.user.profileImage%>"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="flex flex-col ml-2">
+            <div class="text-md">@<%=post.user.username%></div>
+            <div class="text-xs"><%=post.user.followers%> followers</div>
+          </div>
+        </div>
+        <a
+          href="/follow/<%=post.user._id%>"
+          class="px-4 py-2 rounded-full text-black bg-zinc-400 text-sm mt-3 mr-3 float-right"
+          >Follow</a
+        >
+      </div>
+      <div class="mt-7 mx-5 flex justify-center flex-col">
+        <div>
+          <h1 class="capitalize text-lg"><%=post.title%></h1>
+          <p class="text-sm"><%=post.description%></p>
+        </div>
+        <div class="text-blue-700 mt-5">
+          #AdventureSeeker #TechInnovation #FoodieFiesta #MindfulnessJourney
+          #TravelDreams
+        </div>
+        <div class="mt-32 flex items-center justify-between">
+          <h4><%=post.likes%> Likes</h4>
+          <a
+            href="/likes/<%=post._id%>"
+            class="px-4 py-2 rounded-full text-white bg-red-700 text-lg mt-3 mr-3"
+            >♡</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% include ./partials/footer.ejs %>

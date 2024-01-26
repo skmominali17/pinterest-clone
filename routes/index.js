@@ -30,6 +30,7 @@ router.get('/register', function (req, res, next) {
 router.post('/register', function (req, res, next) {
   const data = new userModel({
     username: req.body.username,
+    name: req.body.name,
     email: req.body.email,
     contact: req.body.contact
   });
@@ -82,5 +83,38 @@ router.get('/feed', connectEnsureLogin.ensureLoggedIn(), async function (req, re
   const posts = await postModel.find().populate('user');
   res.render('feed', {posts, nav: true});
 });
+
+router.get('/show/posts/:id', connectEnsureLogin.ensureLoggedIn(), async function (req, res, next) {
+  const post = await postModel.findById(req.params.id).populate('user');
+  console.log(post);
+  res.render('showpost', {post: post, nav: true});
+})
+
+router.get('/save/:id', connectEnsureLogin.ensureLoggedIn(), async function (req, res, next) {
+  const user = await userModel.findOne({username: req.user.username});
+  const post = await postModel.findById(req.params.id);
+  user.boards.push(post.image);
+  await user.save();
+  res.redirect(`/show/posts/${req.params.id}`);
+})
+
+router.get('/follow/:id', connectEnsureLogin.ensureLoggedIn(), async function (req, res, next) {
+  const user = await userModel.findOne({username: req.user.username});
+  const userId = await userModel.findById(req.params.id);
+  if (userId) {
+    user.followers += 1;
+    await user.save();
+  }
+  res.redirect(`/show/posts/${req.params.id}`);
+})
+
+router.get('/likes/:id', connectEnsureLogin.ensureLoggedIn(), async function (req, res, next) {
+  const post = await postModel.findById(req.params.id);
+  if (post) {
+    post.likes += 1;
+    await post.save();
+  }
+  res.redirect(`/show/posts/${req.params.id}`);
+})
 
 module.exports = router;

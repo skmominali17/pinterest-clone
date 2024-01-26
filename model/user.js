@@ -21,7 +21,11 @@ const userSchema = mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Post'
     }
-  ]
+  ], 
+  followers: {
+    type: Number,
+    default: 0
+  }
 })
 
 userSchema.plugin(plm);
