@@ -7,7 +7,7 @@ const upload = require('./multer')
 const postModel = require('../model/post');
 
 router.get('/', (req, res) => {
-  res.render('index', {nav: false});
+  res.render('index', {nav: true});
 })
 
 router.get('/login', function (req, res, next) {
@@ -76,7 +76,12 @@ router.post('/createpost', connectEnsureLogin.ensureLoggedIn(), upload.single("p
 
 router.get('/show/posts', connectEnsureLogin.ensureLoggedIn(), async function (req, res, next) {
   const user = await userModel.findOne({username: req.user.username}).populate('posts');
-  res.render('show', {user:user, nav: true});
+  res.render('show', {user:user, nav: true, type: 'post'});
+});
+
+router.get('/saved', connectEnsureLogin.ensureLoggedIn(), async function (req, res, next) {
+  const user = await userModel.findOne({username: req.user.username});
+  res.render('show', {user:user, nav: true, type: 'saved'});
 });
 
 router.get('/feed', connectEnsureLogin.ensureLoggedIn(), async function (req, res, next) {

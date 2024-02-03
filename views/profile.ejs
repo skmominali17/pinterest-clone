@@ -38,9 +38,9 @@
       Add a post
     </a>
   </div>
-  <%if (user.posts.length === 0) { %>
+  <%if (user.posts.length === 0 && user.boards.length === 0) { %>
   <h1 class="capitalize text-white text-3xl text-center mt-12">
-    You haven't Uploaded any Pins yet...
+    You haven't Uploaded or Saved any Pins yet...
   </h1>
   <%} else { %>
   <div class="cards flex flex-wrap gap-10 px-10">
@@ -51,8 +51,27 @@
           class="w-full h-full object-cover"
         />
       </div>
-      <a class="inline-block text-md font-semibold mt-2 underline" href="/show/posts">Your Uploaded Pins</a>
+      <a
+        class="inline-block text-md font-semibold mt-2 underline"
+        href="/show/posts"
+        >Your Uploaded Pins</a
+      >
       <h5 class="text-xs opacity-60 mt-2"><%=user.posts.length%> pins</h5>
+    </div>
+    <%}%> <%if (user.boards.length > 0) {%>
+    <div class="card">
+      <div class="w-44 h-36 bg-zinc-400 rounded-lg overflow-hidden">
+        <img
+          src="/images/uploads/<%=user.boards[0]%>"
+          class="w-full h-full object-cover"
+        />
+      </div>
+      <a
+        class="inline-block text-md font-semibold mt-2 underline"
+        href="/saved"
+        >Your Saved Pins</a
+      >
+      <h5 class="text-xs opacity-60 mt-2"><%=user.boards.length%> Saved</h5>
     </div>
     <%}%>
   </div>
