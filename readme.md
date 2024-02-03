@@ -48,11 +48,7 @@ http://localhost:3000
 ```
 
 ## Contributing
-We welcome contributions! If you'd like to contribute to this project, please fork the repository and submit a pull request. Make sure to follow the [contribution guidelines](CONTRIBUTING.md).
+We welcome contributions! If you'd like to contribute to this project, please fork the repository and submit a pull request.
 
-## License
-This project is licensed under the [MIT License](LICENSE).
-
----
 
 Feel free to customize this template to fit the specifics of your application and development environment!
