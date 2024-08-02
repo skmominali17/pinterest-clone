@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const plm = require('passport-local-mongoose');
 
-mongoose.connect('mongodb://127.0.0.1:27017/pin').then(() => {
+mongoose.connect('mongodb+srv://skmominali17:ES0uYbJOjwqWLCTf@pinspiration-dev.ul48jzu.mongodb.net/').then(() => {
   console.log('Connected to MongoDB');
 })
 

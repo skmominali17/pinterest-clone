@@ -76,7 +76,7 @@ router.post('/createpost', connectEnsureLogin.ensureLoggedIn(), upload.single("p
 
 router.get('/show/posts', connectEnsureLogin.ensureLoggedIn(), async function (req, res, next) {
   const user = await userModel.findOne({username: req.user.username}).populate('posts');
-  res.render('show', {user:user, nav: true, type: 'post'});
+  res.render('show', {user:user, nav: true, type: 'posts'});
 });
 
 router.get('/saved', connectEnsureLogin.ensureLoggedIn(), async function (req, res, next) {
@@ -91,7 +91,7 @@ router.get('/feed', connectEnsureLogin.ensureLoggedIn(), async function (req, re
 
 router.get('/show/posts/:id', connectEnsureLogin.ensureLoggedIn(), async function (req, res, next) {
   const post = await postModel.findById(req.params.id).populate('user');
-  console.log(post);
+  // console.log(post);
   res.render('showpost', {post: post, nav: true});
 })
 
@@ -120,6 +120,48 @@ router.get('/likes/:id', connectEnsureLogin.ensureLoggedIn(), async function (re
     await post.save();
   }
   res.redirect(`/show/posts/${req.params.id}`);
+})
+
+router.get('/unfollow/:id', connectEnsureLogin.ensureLoggedIn(), async function (req, res, next) {
+  const user = await userModel.findOne({username: req.user.username});
+  const userId = await userModel.findById(req.params.id);
+  if (userId) {
+    user.followers -= 1;
+    await user.save();
+  }
+  res.redirect(`/show/posts/${req.params.id}`);
+})
+
+router.get('/unlike/:id', connectEnsureLogin.ensureLoggedIn(), async function (req, res, next) {
+  const post = await postModel.findById(req.params.id);
+  if (post) {
+    post.likes -= 1;
+    await post.save();
+  }
+  res.redirect(`/show/posts/${req.params.id}`);
+})
+
+router.get('/delete/:id', connectEnsureLogin.ensureLoggedIn(), async function (req, res, next) {
+  const post = await postModel.findById(req.params.id);
+  if (post) {
+    await post.remove();
+  }
+  res.redirect('/profile');
+})
+
+router.get('/delete/saved/:id', connectEnsureLogin.ensureLoggedIn(), async function (req, res, next) {
+  const user = await userModel.findOne({username: req.user.username});
+  const post = await postModel.findById(req.params.id);
+  if (post) {
+    user.boards.pull(post.image);
+    await user.save();
+  }
+  res.redirect('/saved');
+})
+
+router.get('/edit/:id', connectEnsureLogin.ensureLoggedIn(), async function (req, res, next) {
+  const post = await postModel.findById(req.params.id);
+  res.render('edit', {post: post, nav: true});
 })
 
 module.exports = router;
